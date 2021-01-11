@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+</html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Register Yourself with your Unique ID">
+    <link rel="stylesheet" href="">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="style1.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
+    <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
+
+</head>
+
+
+<body>
+    <h1>Registration Form</h1>
+    <div class="regform">
+        <!-- <form action="/index.html"> -->
+        <label for="policeID" style="padding-left: 6px;">Police ID</label>
+        <input type="text" name="First name" id="policeID" required>
+        <label for="firstName" style="padding-left: 6px;">First Name</label>
+        <input type="text" name="First name" id="firstName" required>
+        <label for="lastName">Last Name</label>
+        <input type="text" name="Last Name" id="lastName" required>
+        <label for="fatherName">Father's Name</label>
+        <input type="text" name="Father's Name" id="fatherName" required>
+        <label for="email"> E-mail</label>
+        <input type="email" name="e-mail" id="email" required>
+        <label for="address">Permenant Address</label>
+        <textarea name="address" id="address" cols="30" rows="3"></textarea>
+        <label for="joined">Join Date</label>
+        <input type="date" name="Joindate" id="joined" required>
+        <label for="station">Station ID</label>
+        <input type="text" name="Station" id="station" required>
+        <label for="pass">Password</label>
+        <input type="password" name="Password" id="pass" required>
+        <meter max="4" id="password-strength-meter"></meter>
+        <p id="password-strength-text"></p>
+        <label for="pass2">Confirm Password</label>
+        <input type="password" name="Password2" id="passCnf" required>
+        <button type="submit" class="submitBtn" id="registerBtn">Submit</button>
+        <!-- </form> -->
+    </div>
+    <script src="register.js"></script>
+</body>
+
+</html>

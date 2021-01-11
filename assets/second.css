@@ -1,0 +1,39 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background: url(img/pexels-miguel-á-padriñán-255379.jpg);
+  background-size: cover;
+  font-family: sans-serif;
+}
+
+.navbar {
+  width: 100%;
+  min-height: 8vh;
+  background-color: aliceblue;
+  margin: auto;
+  display: flex;
+  align-items: center;
+}
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-left: 60%;
+  min-height: 8vh;
+  background-color: #5d49;
+  width: 100%;
+}
+nav ul li {
+  display: inline-block;
+  list-style: none;
+  margin: 0px 50px;
+}
+nav ul li a {
+  text-decoration: none;
+  color: #333;
+}
