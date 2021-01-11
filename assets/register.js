@@ -45,7 +45,7 @@ password.addEventListener('input', function () {
 
 async function register() {
     if (!err) {
-        var auth = await fetch('https://localhost:3000/user', {
+        var auth = await fetch('http://localhost:3000/user', {
             method: 'POST',
             body: JSON.stringify({
                 'firstName': firstName,
@@ -59,7 +59,16 @@ async function register() {
                 'policeID': policeID
             }),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'firstName': firstName,
+                'lastName': lastName,
+                'fatherName': fatherName,
+                'email': email,
+                'address': address,
+                'stationID': stationID,
+                'joinDate': joinDate,
+                'password': password,
+                'policeID': policeID
             }
         });
         console.log(auth);

@@ -63,46 +63,50 @@ app.get("/register.js", (req, res) => {
         root: __dirname,
     });
 });
+app.post('/user', (req, res) => {
+    // console.log(
+    //     req
+    // );
+    con.query(
+        "INSERT INTO POLICE VALUES('" +
+        req.headers.policeID +
+        "','" +
+        req.headers.password +
+        "','" +
+        req.headers.stationID +
+        "','" +
+        req.headers.firstName + ' ' + req.headers.lastName +
+        "','" +
+        req.headers.address +
+        "','" +
+        req.headers.joinDate +
+        "','" +
+        req.headers.fatherName +
+        "')",
+        (err, result) => {
+            if (err) {
+                res.sendStatus(403).send("Retry");
+                throw err;
+            }
+            console.log(result);
+        }
+    );
+    res.sendStatus(201);
+    // console.log(req.body.user + "inserted");
+})
 app.get("/user", (req, res) => {
-    if (req.method == "GET") {
-        con.query(
-            "SELECT * FROM user WHERE name=" + req.body.user,
-            (err, result) => {
-                if (err || result == null || result.length == 0) {
-                    res.sendStatus(401).send();
-                    res.end();
-                }
-                // res.statusCode = 201
-                res.sendStatus(201).send("Authorized");
+    console.log(req.method);
+    con.query(
+        "SELECT * FROM user WHERE name=" + req.body.user,
+        (err, result) => {
+            if (err || result == null || result.length == 0) {
+                res.sendStatus(401).send();
+                res.end();
             }
-        );
-    } else if (req.method == "POST") {
-        con.query(
-            "INSERT INTO POLICE VALUES('" +
-            req.body.policeID +
-            "','" +
-            req.body.password +
-            "','" +
-            req.body.stationID +
-            "','" +
-            req.body.firstName + ' ' + req.body.lastName +
-            "','" +
-            req.body.address +
-            "','" +
-            req.body.joinDate +
-            "','" +
-            req.body.fatherName +
-            "')",
-            (err, result) => {
-                if (err) {
-                    res.sendStatus(403).send("Retry");
-                    throw err;
-                }
-                console.log(result);
-            }
-        );
-        res.sendStatus(201).send("User Created");
-        console.log(req.body.user + "inserted");
-    }
+            // res.statusCode = 201
+            res.sendStatus(201).send("Authorized");
+        }
+    );
+
 });
 app.listen(port, () => console.log(`Example app listening on port $port!`));
