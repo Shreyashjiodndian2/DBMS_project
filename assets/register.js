@@ -44,28 +44,27 @@ password.addEventListener('input', function () {
 });
 
 async function register() {
-    if (!err) 
-        {
-            var auth = await fetch('https://localhost:3000/user', {
-                method: 'POST',
-                body: JSON.stringify({
-                    'firstName': firstName,
-                    'lastName': lastName,
-                    'fatherName': fatherName,
-                    'email': email,
-                    'address': address,
-                    'stationID': stationID,
-                    'joinDate': joinDate,
-                    'password': password,
-                    'policeID': policeID
-                }),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            console.log(auth);
-        }
+    if (!err) {
+        var auth = await fetch('https://localhost:3000/user', {
+            method: 'POST',
+            body: JSON.stringify({
+                'firstName': firstName,
+                'lastName': lastName,
+                'fatherName': fatherName,
+                'email': email,
+                'address': address,
+                'stationID': stationID,
+                'joinDate': joinDate,
+                'password': password,
+                'policeID': policeID
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        console.log(auth);
     }
+}
 
 loginButton.addEventListener('click', () => {
     firstName = document.getElementById('firstName').value;
@@ -75,8 +74,8 @@ loginButton.addEventListener('click', () => {
     address = document.getElementById('address').value;
     joinDate = document.getElementById('joined').value
     stationID = document.getElementById('station').value;
-    password = Crypto.SHA256(document.getElementById('pass').value);
-    cnf_pass = Crypto.SHA256(document.getElementById('passCnf').value);
+    password = document.getElementById('pass').value;
+    cnf_pass = document.getElementById('passCnf').value;
     policeID = document.getElementById('policeID').value;
 
     //validation part
