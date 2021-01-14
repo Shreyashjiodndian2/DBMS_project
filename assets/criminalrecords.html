@@ -5,35 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="criminal.css">
-    <title>Document</title>
+    <title>Criminal</title>
 </head>
 
 <body>
     <div class="navbar">
         <nav>
-            <h3 class="policeId"></h3>
+            <h3 id="policeId"></h3>
             <ul>
                 <li><a href="/criminal"> View Criminal Records</a></li>
-                <li><a href="/arrests">Arrests</a></li>
-                <li><a href="/">Logout</a></li>
+                <li><a href="/arrests" id="arrestBtn">Arrests</a></li>
+                <li><a href="/" id="logoutBtn">Logout</a></li>
             </ul>
         </nav>
-        <div class="tablewrap">
+        <div id="errorMsg" style="visibility: hidden;">
+            No Data Found!!
+        </div>
+        <div id="tablewrap">
             <table>
                 <tr>
+                    <th>Case ID</th>
                     <th>Name</th>
                     <th>Criminal ID</th>
-                    <th>Father's Name</th>
+                    <!-- <th>Father's Name</th> -->
                     <th>Arrested For</th>
                     <th>Date</th>
+                    <th>Modify/Delete</th>
                 </tr>
-                <%
-        if(userData.length!=0){
-        var i=1;
-        userData.forEach(function(data){
-        %>
-                <tr>
-                    <!-- <td><%=i; %></td> -->
+                <!-- <%if(userData.length!=0){ var i=1; userData.forEach(function(data){ %>
+                    <tr> -->
+                <!-- <td><%=i; %></td> -->
+                <!-- <td><%=data.Arrest></td>
                     <td><%=data.CName %></td>
                     <td><%=data.CriminalID %></td>
                     <td><%=data.FatherName %></td>
@@ -45,9 +47,10 @@
                 <tr>
                     <td colspan="7">No Data Found</td>
                 </tr>
-                <% } %>
+                <% } %> -->
             </table>
         </div>
+        <script src="/criminal.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,35 @@
+.tablewrap {
+    padding-left: 10%;
+    width: 83%;
+}
+
+table {
+    width: 83%;
+}
+
+th {
+    text-align: left;
+    background-color: #009999;
+    color: #fff;
+}
+
+table,
+th,
+td {
+    margin: 16px;
+    border: 2px solid #000;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 10px;
+}
+
+tr:nth-child(even) {
+    background-color: #fff;
+}
+
+tr:nth-child(odd) {
+    background-color: #ddd;
+}

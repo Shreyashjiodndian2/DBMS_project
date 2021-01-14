@@ -20,6 +20,7 @@ async function login() {
         document.getElementById('warning').style.visibility = "visible"
     } else if (auth.status == 201) {
         console.log('Access Granted');
+        document.cookie = "";
         document.cookie = "policeid=" + policeID;
         window.location.replace('http://localhost:3000/criminal');
     }

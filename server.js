@@ -106,7 +106,7 @@ app.post('/user', (req, res) => {
 app.get("/user", (req, res) => {
     console.log(req.method);
     con.query(
-        "SELECT * FROM POLICE WHERE PoliceID=" + req.headers.user + " AND password='" + req.headers.password + "'",
+        "SELECT * FROM POLICE WHERE PoliceID='" + req.headers.user + "' AND password='" + req.headers.password + "'",
         (err, result) => {
             if (err || result == null || result.length == 0) {
                 res.sendStatus(401).send();
@@ -130,14 +130,26 @@ app.get("/criminal.css", (req, res) => {
         root: __dirname,
     });
 })
+
+app.get("/criminal.js", (req, res) => {
+    res.sendFile("/assets/criminal.js", {
+        root: __dirname,
+    });
+})
 app.get("/user/data", (req, res) => {
-    con.query("SELECT * FROM ARRESTS WHERE PoliceID=" + req.headers.user, (err, result) => {
-        if (err) {
+    con.query("SELECT * FROM ARRESTS WHERE PoliceID='" + req.headers.user + "'", (err, result) => {
+        if (err || result == null || result.length == 0) {
             res.sendStatus(401);
             console.log(err);
         } else {
-            res.render('arrest-list', { title: 'Arrests List', userData: result });
+            res.json(JSON.stringify(result));
+            // console.log(result);
         }
     })
+});
+app.get("/arrests", (req, res) => {
+    res.sendFile("/assets/arrests.html", {
+        root: __dirname,
+    });
 })
 app.listen(port, () => console.log(`Example app listening on port $port!`));
