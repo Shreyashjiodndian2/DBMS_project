@@ -152,4 +152,53 @@ app.get("/arrests", (req, res) => {
         root: __dirname,
     });
 })
-app.listen(port, () => console.log(`Example app listening on port $port!`));
+app.get("/arrests.css", (req, res) => {
+    res.sendFile("/assets/arrests.css", {
+        root: __dirname,
+    });
+})
+app.get("/arrests.js", (req, res) => {
+    res.sendFile("/assets/arrests.js", {
+        root: __dirname,
+    });
+})
+app.post('/arrests', (req, res) => {
+    con.query("SELECT StationID, count FROM POLICESTATION WHERE StationID='" + req.headers.stationid + "';", (err, result) => {
+        if (err) {
+            res.sendStatus(404);
+        } else {
+            console.log(result[0]['count']);
+            con.query(
+                "INSERT INTO ARRESTS VALUES('" +
+                req.headers.stationid +(result[0]['count'])+
+                "','" +
+                req.headers.crimedate +
+                "','" +
+                req.headers.policeid +
+                "','" +
+                req.headers.criminalid +
+                "','" +
+                req.headers.reason +
+                "','" +
+                req.headers.criminalname +
+                "','" +
+                req.headers.witnessstatement +
+                "','" +
+                req.headers.ipcsection +
+                "')",
+                (err, result_1) => {
+                    if (err || result_1 == null || result_1.length == 0) {
+                        res.statusCode = 404;
+                        res.end();
+                        console.log(err);
+                    } else {
+                        res.sendStatus(201);
+                    }
+                    console.log(result_1);
+                }
+            );
+        }
+    })
+
+})
+app.listen(port, () => console.log(`Example app listening on port ${port}!`));
