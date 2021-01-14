@@ -7,20 +7,23 @@
     <title>Log In</title>
     <link rel="icon" href="/img/609oncomingpolicecar_100542.ico">
     <link rel="stylesheet" href="style.css">
+    <!-- <script src="index.js"></script> -->
 </head>
 
 <body>
+    <!-- <script src="index.js"></script> -->
     <h1>Welcome to the Police Station Website</h1>
     <div class="loginbox">
         <h2>Login</h2>
-        <form action="#">
+        <div>
             <p>Police ID</p>
             <input type="text" name="Police ID" id="user" placeholder="Enter your ID" required>
             <p>Password</p>
             <input type="password" name="Password" id="pass" placeholder="Enter the password" required>
+            <div style="visibility: hidden;color: red;font-size: 20px;font-family: Arial, Helvetica, sans-serif;" id="warning">Incorrect UserName or Password entered</div>
             <button type="submit" class="button" id="loginButton">Login</button>
             <h3>Not Registered? <a href="/register"> Register here.</a></h3>
-        </form>
+        </div>
     </div>
     <script src="index.js"></script>
 </body>

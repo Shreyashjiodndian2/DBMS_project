@@ -71,7 +71,11 @@ async function register() {
                 'policeID': policeID
             }
         });
-        console.log(auth);
+    }
+    if (auth.status == 404) {
+        window.location.replace('http://localhost:3000/register');
+    } else if (auth.status == 201) {
+        window.location.href = 'http://localhost:3000/'
     }
 }
 

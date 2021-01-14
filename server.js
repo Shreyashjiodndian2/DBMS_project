@@ -3,6 +3,7 @@ const mysql = require("mysql");
 const cors = require("cors");
 // import AES from 'crypto-js/aes';
 const app = express();
+app.use(cors())
 const port = 3000;
 
 var con = mysql.createConnection({
@@ -28,6 +29,10 @@ con.connect((err) => {
 // , lastName VARCHAR(50) NOT NULL, fatherName VARCHAR(50) NOT NULL
 
 app.use(cors());
+app.get("/", (req, res) =>
+    res.sendFile("assets/index.html", {
+        root: __dirname,
+    }));
 app.get("/login", (req, res) =>
     res.sendFile("assets/index.html", {
         root: __dirname,
@@ -69,44 +74,70 @@ app.post('/user', (req, res) => {
     // );
     con.query(
         "INSERT INTO POLICE VALUES('" +
-        req.headers.policeID +
+        req.headers.policeid +
         "','" +
         req.headers.password +
         "','" +
-        req.headers.stationID +
+        req.headers.stationid +
         "','" +
-        req.headers.firstName + ' ' + req.headers.lastName +
+        req.headers.firstname + ' ' + req.headers.lastname +
         "','" +
         req.headers.address +
         "','" +
-        req.headers.joinDate +
+        req.headers.joindate +
         "','" +
-        req.headers.fatherName +
+        req.headers.fathername +
+        "','" +
+        req.headers.stationid +
         "')",
         (err, result) => {
             if (err) {
-                res.sendStatus(403).send("Retry");
-                throw err;
+                res.statusCode = 404;
+                res.end();
+                console.log(err);
+            } else {
+                res.sendStatus(201);
             }
             console.log(result);
         }
     );
-    res.sendStatus(201);
     // console.log(req.body.user + "inserted");
 })
 app.get("/user", (req, res) => {
     console.log(req.method);
     con.query(
-        "SELECT * FROM user WHERE name=" + req.body.user,
+        "SELECT * FROM POLICE WHERE PoliceID=" + req.headers.user + " AND password='" + req.headers.password + "'",
         (err, result) => {
             if (err || result == null || result.length == 0) {
                 res.sendStatus(401).send();
                 res.end();
+            } else {
+                res.sendStatus(201);
             }
             // res.statusCode = 201
-            res.sendStatus(201).send("Authorized");
+
         }
     );
 
 });
+app.get("/criminal", (req, res) => {
+    res.sendFile("/assets/criminalrecords.html", {
+        root: __dirname,
+    });
+});
+app.get("/criminal.css", (req, res) => {
+    res.sendFile("/assets/criminal.css", {
+        root: __dirname,
+    });
+})
+app.get("/user/data", (req, res) => {
+    con.query("SELECT * FROM ARRESTS WHERE PoliceID=" + req.headers.user, (err, result) => {
+        if (err) {
+            res.sendStatus(401);
+            console.log(err);
+        } else {
+            res.render('arrest-list', { title: 'Arrests List', userData: result });
+        }
+    })
+})
 app.listen(port, () => console.log(`Example app listening on port $port!`));
