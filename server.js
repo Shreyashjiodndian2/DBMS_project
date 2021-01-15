@@ -170,7 +170,7 @@ app.post('/arrests', (req, res) => {
             console.log(result[0]['count']);
             con.query(
                 "INSERT INTO ARRESTS VALUES('" +
-                req.headers.stationid +(result[0]['count'])+
+                req.headers.stationid + (result[0]['count']) +
                 "','" +
                 req.headers.crimedate +
                 "','" +
@@ -200,5 +200,66 @@ app.post('/arrests', (req, res) => {
         }
     })
 
+})
+// app.get('/modify')
+app.get('/modify', (req, res) => {
+    // console.log(req.query.id);
+    con.query("SELECT * FROM ARRESTS WHERE Arrestid='" + req.query.id + "'", (err, result) => {
+        if (err || result == null || result.length == 0) {
+            res.status(404).send('Arrest table error');
+        } else {
+            out = result[0];
+            con.query("SELECT * FROM WITNESS WHERE arrestid='" + result[0]['Arrestid'] + "'", (err, result) => {
+                if (err) {
+                    res.status(203).send('witness table error');
+                } else if (result == null || result.length == 0) {
+                    res.set({
+                        'crimeDate': out['date'],
+                        'ipcSection': out['IpcSection'],
+                        'reason': out['reason'],
+                        // 'stationID': out[],
+                        'policeID': out['PoliceID'],
+                        'CriminalID': out['CriminalID'],
+                        'criminalName': out['CName'],
+                        'witnessStatement': out['Statement'],
+                    });
+                    res.statusCode = 201;
+                    res.sendFile("/assets/modify.html", {
+                        root: __dirname
+                    });
+                } else {
+
+                    out1 = result[0];
+                    res.set({
+                        'crimeDate': out['date'],
+                        'ipcSection': out['IpcSection'],
+                        'reason': out['reason'],
+                        // 'stationID': out[],
+                        'policeID': out['PoliceID'],
+                        'CriminalID': out['CriminalID'],
+                        'criminalName': out['CName'],
+                        'address': out1['address'],
+                        'witnessName': out1['name'],
+                        'witnessPhone': out1['phonenumber'],
+                        'witnessAddress': out1['address'],
+                        'witnessStatement': out['Statement'],
+                    });
+                    res.sendFile("/assets/modify.html", {
+                        root: __dirname
+                    });
+                }
+            })
+        }
+    })
+})
+app.get("/modify.css", (req, res) => {
+    res.sendFile("/assets/modify.css", {
+        root: __dirname,
+    });
+})
+app.get("/modify.js", (req, res) => {
+    res.sendFile("/assets/modify.js", {
+        root: __dirname,
+    });
 })
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

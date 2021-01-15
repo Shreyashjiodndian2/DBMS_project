@@ -19,7 +19,7 @@ async function getData() {
                 response.json().then(
                     (data) => {
                         JSON.parse(data).forEach(element => {
-                            document.getElementsByTagName("table")[0].innerHTML += "<td>" + element["Arrestid"] + "</td> <td>" + element['CName'] + "</td> <td >" + element['CriminalID'] + " </td> <td > " + element['reason'] + " </td> <td > " + element['date'] + " </td> <td ><a href='http://localhost:3000/user/data/" + element['Arrestid'] + "'>modify</a></td>"
+                            document.getElementsByTagName("table")[0].innerHTML += "<td>" + element["Arrestid"] + "</td> <td>" + element['CName'] + "</td> <td >" + element['CriminalID'] + " </td> <td > " + element['reason'] + " </td> <td > " + element['date'] + " </td> <td ><a href='http://localhost:3000/modify/?id=" + element['Arrestid'] + "'>modify</a></td>"
                         });
                     }
                 )
