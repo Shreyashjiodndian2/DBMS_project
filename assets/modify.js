@@ -1,4 +1,4 @@
-const { response } = require("express");
+// const { response } = require("express");
 
 var regex = /^[A-Za-z0-9 ]+$/
 // var numRegex = /^[0-9 ]+$/;
@@ -37,8 +37,7 @@ async function reportCrime() {
         }).then((response) => {
             if (response.status == 404) {
                 alert("Please enter valid data");
-            }
-            else if (response.status >= 500) {
+            } else if (response.status >= 500) {
                 alert("Please contact Developer")
             } else if (response.status == 201) {
                 alert("Complaint registered successfully!!");
@@ -121,6 +120,7 @@ document.getElementById("reportCrime").addEventListener("click", () => {
 async function setData() {
     await fetch(window.location.href).then(
         (response) => {
+            console.log(response.headers);
             document.getElementById('DateOfArrest').value = response.headers.get('crimeDate');
             document.getElementById('ipcSection').value = response.headers.get('ipcSection');
             document.getElementById('reason').value = response.headers.get('reason');

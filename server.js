@@ -4,7 +4,7 @@ const cors = require("cors");
 // import AES from 'crypto-js/aes';
 const app = express();
 app.use(cors())
-const port = 3000;
+const port = 8000;
 
 var con = mysql.createConnection({
     host: "localhost",
@@ -218,6 +218,7 @@ app.get('/modify', (req, res) => {
                         'ipcSection': out['IpcSection'],
                         'reason': out['reason'],
                         // 'stationID': out[],
+                        // 'address': out1['address'],
                         'policeID': out['PoliceID'],
                         'CriminalID': out['CriminalID'],
                         'criminalName': out['CName'],
